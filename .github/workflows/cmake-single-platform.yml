@@ -40,5 +40,5 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cd /home/user/llvm-google/llvm/out && cmake --build ${{github.workspace}}/llvm/out
+      run: cd /home/user/llvm-google/llvm/out && ninja
 
