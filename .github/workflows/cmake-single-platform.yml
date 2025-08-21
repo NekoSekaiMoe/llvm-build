@@ -42,6 +42,7 @@ jobs:
         sudo chmod 777 -R /home/user
         sudo mv a -v /home/user/llvm-google
         sudo mv b/out -v /home/user/llvm-google/llvm/out
+        sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
 
     - name: Build
       # Build your program with the given configuration
