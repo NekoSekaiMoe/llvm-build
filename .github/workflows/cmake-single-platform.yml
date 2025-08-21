@@ -4,10 +4,8 @@ name: CMake on a single platform
 
 on:
   push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
-
+  workflow_dispatch:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: Release
@@ -40,13 +38,13 @@ jobs:
         sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
         sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
 
-    - name: ccache
-      uses: hendrikmuhs/ccache-action@v1.2
-      with:
-        create-symlink: true
-        max-size: 2048M
-
     - name: Build
       # Build your program with the given configuration
       run: cd /home/user/llvm-google/llvm/out && DESTDIR=$HOME/out ninja install
+    - run: cpack -G deb && sudo chmod 777 *.deb
+    - name: Upload
+      uses: actions/uploqd-artifact@v4
+      with:
+       name: deb
+       path: *.deb
 
