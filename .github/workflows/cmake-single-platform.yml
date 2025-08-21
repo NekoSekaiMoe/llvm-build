@@ -29,11 +29,6 @@ jobs:
     - uses: actions/checkout@v5
       with:
         path: b 
-    - name: ccache
-      uses: hendrikmuhs/ccache-action@v1.2
-      with:
-        create-symlink: true
-        max-size: 2048M
     - name: dep
       run: |
         sudo apt update
@@ -43,6 +38,13 @@ jobs:
         sudo mv a -v /home/user/llvm-google
         sudo mv b/out -v /home/user/llvm-google/llvm/out
         sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
+        sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+        create-symlink: true
+        max-size: 2048M
 
     - name: Build
       # Build your program with the given configuration
