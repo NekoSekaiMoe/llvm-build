@@ -40,5 +40,5 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cd /home/user/llvm-google/llvm/out && ninja
+      run: cd /home/user/llvm-google/llvm/out && DESTDIR=$HOME/out ninja install
 

@@ -1804,33 +1804,6 @@ TOOL_INFO_PLIST:STRING=Info.plist
 // removed
 USE_DEPRECATED_GCC_INSTALL_PREFIX:BOOL=OFF
 
-//Path to a file.
-ZLIB_INCLUDE_DIR:PATH=/usr/local/include
-
-//Path to a library.
-ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
-
-//Path to a library.
-ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib/libz.so
-
-llvm_nm_exe:STRING=$<TARGET_FILE:llvm-nm>
-
-llvm_nm_target:STRING=llvm-nm
-
-llvm_readobj_exe:STRING=$<TARGET_FILE:llvm-readobj>
-
-llvm_readobj_target:STRING=llvm-readobj
-
-//Path to a file.
-zstd_INCLUDE_DIR:PATH=/usr/include
-
-//Path to a library.
-zstd_LIBRARY:FILEPATH=/usr/lib/aarch64-linux-gnu/libzstd.so
-
-//Path to a library.
-zstd_STATIC_LIBRARY:FILEPATH=/usr/lib/aarch64-linux-gnu/libzstd.a
-
-
 ########################
 # INTERNAL cache entries
 ########################
