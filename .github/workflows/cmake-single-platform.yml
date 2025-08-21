@@ -32,7 +32,7 @@ jobs:
     - name: dep
       run: |
         sudo apt update
-        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev -y 
+        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev -y 
         sudo mkdir -p /home/user
         sudo chmod 777 -R /home/user
         sudo mv a -v /home/user/llvm-google 

@@ -1811,7 +1811,7 @@ ZLIB_INCLUDE_DIR:PATH=/usr/local/include
 ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
-ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/local/lib/libz.so
+ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib/libz.so
 
 llvm_nm_exe:STRING=$<TARGET_FILE:llvm-nm>
 
