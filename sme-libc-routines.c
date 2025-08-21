@@ -1,7 +1,7 @@
 #include <stddef.h>
 
+    __attribute__((__aarch64_streaming_compatible__))
 const void *__arm_sc_memchr(const void *src, int c, size_t n)
-    __attribute__((__arm_streaming_compatible))
 {
   const unsigned char *srcp = (const unsigned char *)src;
   unsigned char c8 = (unsigned char)c;
