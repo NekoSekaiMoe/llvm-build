@@ -35,8 +35,8 @@ jobs:
         sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev -y 
         sudo mkdir -p /home/user
         sudo chmod 777 -R /home/user
-        sudo mv a /home/user/llvm-google 
-        sudo mv b /home/user/llvm-google/llvm/
+        sudo mv a -v /home/user/llvm-google 
+        sudo mv b -v /home/user/llvm-google/llvm/out
 
     - name: Build
       # Build your program with the given configuration
