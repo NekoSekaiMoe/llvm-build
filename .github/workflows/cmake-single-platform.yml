@@ -43,7 +43,7 @@ jobs:
       run: cd /home/user/llvm-google/llvm/out && DESTDIR=$HOME/out ninja install
     - run: cpack -G deb && sudo chmod 777 *.deb
     - name: Upload
-      uses: actions/uploqd-artifact@v4
+      uses: actions/upload-artifact@v4
       with:
        name: deb
        path: llvm*.deb
