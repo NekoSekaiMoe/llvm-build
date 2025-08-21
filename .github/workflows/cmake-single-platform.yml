@@ -28,8 +28,10 @@ jobs:
     - uses: actions/checkout@v4
       with:
         path: ccc
+    - name: dep
+      run: sudo apt update && sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev -y && mv -v ccc/out llvm/
 
     - name: Build
       # Build your program with the given configuration
-      run: mv -v ccc/out llvm/ && cmake --build ${{github.workspace}}/llvm/out
+      run: cmake --build ${{github.workspace}}/llvm/out
 
