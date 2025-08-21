@@ -24,14 +24,15 @@ jobs:
       with:
         repository: dpkg123/llvm-google
         ref: llvm-r547379-release
+        path: /home/user/llvm-google
 
     - uses: actions/checkout@v4
       with:
-        path: ccc
+        path: /home/user/llvm-google/ccc
     - name: dep
-      run: sudo apt update && sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev -y && mv -v ccc/out llvm/
+      run: sudo apt update && sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev -y && mv -v /home/user/llvm-google/ccc/out /home/user/llvm-google/llvm/
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/llvm/out
+      run: cd /home/user/llvm-google/llvm/out && cmake --build ${{github.workspace}}/llvm/out
 
