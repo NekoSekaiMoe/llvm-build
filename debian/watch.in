@@ -1,0 +1,8 @@
+version=4
+opts=repack,compression=xz, \
+  https://github.com/llvm/llvm-project/tags \
+  (?:.*?/)?llvmorg-(@LLVM_VERSION@[\d\.\-]+).tar.gz
+
+opts=component=integration-test-suite,mode=git,pgpmode=none,repack \
+  https://github.com/opencollab/llvm-toolchain-integration-test-suite \
+  HEAD

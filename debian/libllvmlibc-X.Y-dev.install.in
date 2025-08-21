@@ -1,0 +1,5 @@
+usr/lib/llvm-@LLVM_VERSION@/lib/libllvmlibc.a
+usr/lib/llvm-@LLVM_VERSION@/lib/libllvmlibc_rpc_server.a
+usr/lib/llvm-@LLVM_VERSION@/include/shared/rpc.h
+usr/lib/llvm-@LLVM_VERSION@/include/shared/rpc_opcodes.h
+usr/lib/llvm-@LLVM_VERSION@/include/shared/rpc_util.h

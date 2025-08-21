@@ -1,0 +1,13 @@
+# Target labels
+ bolt_rt
+# Source files and their labels
+/home/user/llvm-google/llvm/out/tools/bolt/CMakeFiles/bolt_rt
+/home/user/llvm-google/llvm/out/tools/bolt/CMakeFiles/bolt_rt.rule
+/home/user/llvm-google/llvm/out/tools/bolt/CMakeFiles/bolt_rt-complete.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-build.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-configure.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-download.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-install.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-mkdir.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-patch.rule
+/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-update.rule

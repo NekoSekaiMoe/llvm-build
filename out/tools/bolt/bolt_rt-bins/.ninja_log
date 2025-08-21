@@ -1,0 +1,5 @@
+# ninja log v6
+56	365	1755754725040008102	CMakeFiles/bolt_rt_hugify.dir/hugify.cpp.o	5780642825ac87a2
+371	808	1755754725372008102	lib/libbolt_rt_hugify.a	416fa9b2c14508fd
+53	6697	1755754725036008102	CMakeFiles/bolt_rt_instr.dir/instr.cpp.o	1eda353307d891d1
+6700	7172	1755754731684008101	lib/libbolt_rt_instr.a	82ec411cc8e95e0e

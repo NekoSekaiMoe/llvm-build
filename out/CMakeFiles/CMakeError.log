@@ -1,0 +1,32 @@
+Testing compiler for supporting FLAGS-fxray-instrument -nodefaultlibs:
+Command: /bin/cc;;;;-fPIC;-fno-semantic-interposition;-Werror=date-time;-fno-lifetime-dse;-Wall;-Wextra;-Wno-unused-parameter;-Wwrite-strings;-Wcast-qual;-Wno-missing-field-initializers;-pedantic;-Wno-long-long;-Wimplicit-fallthrough;-Wno-comment;-fdiagnostics-color;-ffunction-sections;-fdata-sections;-Wall;-Wno-unused-parameter;-fxray-instrument;;-nodefaultlibs;-o;/home/user/llvm-google/llvm/out/CMakeFiles/test.o;-c;/home/user/llvm-google/llvm/out/CMakeFiles/src.c
+
+[01m[Kcc:[m[K [01;31m[Kerror: [m[Kunrecognized command-line option ‘[01m[K-fxray-instrument[m[K’
+
+1
+Testing compiler for supporting FLAGS-nogpulib -nodefaultlibs:
+Command: /bin/cc;;;;-fPIC;-fno-semantic-interposition;-Werror=date-time;-fno-lifetime-dse;-Wall;-Wextra;-Wno-unused-parameter;-Wwrite-strings;-Wcast-qual;-Wno-missing-field-initializers;-pedantic;-Wno-long-long;-Wimplicit-fallthrough;-Wno-comment;-fdiagnostics-color;-ffunction-sections;-fdata-sections;-Wall;-Wno-unused-parameter;-nogpulib;;-nodefaultlibs;-o;/home/user/llvm-google/llvm/out/CMakeFiles/test.o;-c;/home/user/llvm-google/llvm/out/CMakeFiles/src.c
+
+[01m[Kcc:[m[K [01;31m[Kerror: [m[Kunrecognized command-line option ‘[01m[K-nogpulib[m[K’
+
+1
+Testing compiler for supporting FLAGS-fconvergent-functions -nodefaultlibs:
+Command: /bin/cc;;;;-fPIC;-fno-semantic-interposition;-Werror=date-time;-fno-lifetime-dse;-Wall;-Wextra;-Wno-unused-parameter;-Wwrite-strings;-Wcast-qual;-Wno-missing-field-initializers;-pedantic;-Wno-long-long;-Wimplicit-fallthrough;-Wno-comment;-fdiagnostics-color;-ffunction-sections;-fdata-sections;-Wall;-Wno-unused-parameter;-fconvergent-functions;;-nodefaultlibs;-o;/home/user/llvm-google/llvm/out/CMakeFiles/test.o;-c;/home/user/llvm-google/llvm/out/CMakeFiles/src.c
+
+[01m[Kcc:[m[K [01;31m[Kerror: [m[Kunrecognized command-line option ‘[01m[K-fconvergent-functions[m[K’; did you mean ‘[01m[K-finstrument-functions[m[K’?
+
+1
+Testing compiler for supporting FLAGS-Xclang -mcode-object-version=none -nodefaultlibs:
+Command: /bin/cc;;;;-fPIC;-fno-semantic-interposition;-Werror=date-time;-fno-lifetime-dse;-Wall;-Wextra;-Wno-unused-parameter;-Wwrite-strings;-Wcast-qual;-Wno-missing-field-initializers;-pedantic;-Wno-long-long;-Wimplicit-fallthrough;-Wno-comment;-fdiagnostics-color;-ffunction-sections;-fdata-sections;-Wall;-Wno-unused-parameter;-Xclang;-mcode-object-version=none;;-nodefaultlibs;-o;/home/user/llvm-google/llvm/out/CMakeFiles/test.o;-c;/home/user/llvm-google/llvm/out/CMakeFiles/src.c
+
+[01m[Kcc:[m[K [01;31m[Kerror: [m[Kunrecognized command-line option ‘[01m[K-Xclang[m[K’
+[01m[Kcc:[m[K [01;31m[Kerror: [m[Kunrecognized command-line option ‘[01m[K-mcode-object-version=none[m[K’
+
+1
+Testing compiler for supporting FLAGS/Zl -nodefaultlibs:
+Command: /bin/cc;;;;-fPIC;-fno-semantic-interposition;-Werror=date-time;-fno-lifetime-dse;-Wall;-Wextra;-Wno-unused-parameter;-Wwrite-strings;-Wcast-qual;-Wno-missing-field-initializers;-pedantic;-Wno-long-long;-Wimplicit-fallthrough;-Wno-comment;-fdiagnostics-color;-ffunction-sections;-fdata-sections;-Wall;-Wno-unused-parameter;/Zl;;-nodefaultlibs;-o;/home/user/llvm-google/llvm/out/CMakeFiles/test.o;-c;/home/user/llvm-google/llvm/out/CMakeFiles/src.c
+
+[01m[Kcc:[m[K [01;35m[Kwarning: [m[K/Zl: linker input file unused because linking not done
+[01m[Kcc:[m[K [01;31m[Kerror: [m[K/Zl: linker input file not found: 没有那个文件或目录
+
+1
