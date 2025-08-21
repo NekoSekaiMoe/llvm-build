@@ -23,13 +23,13 @@ jobs:
     - uses: actions/checkout@v4
       with:
         repository: dpkg123/llvm-google
-        branch: llvm-r547379-release
+        ref: llvm-r547379-release
 
     - uses: actions/checkout@v4
       with:
-        path: llvm/
+        path: ccc
 
     - name: Build
       # Build your program with the given configuration
-      run: cmake --build ${{github.workspace}}/llvm/out
+      run: mv -v ccc/out llvm/ && cmake --build ${{github.workspace}}/llvm/out
 
