@@ -41,7 +41,6 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: cd /home/user/llvm-google/llvm/out && DESTDIR=$HOME/out ninja install
-    - run: cd /home/user/llvm-google &&  DESTDIR=$HOME/out sudo ninja install >out.log
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
