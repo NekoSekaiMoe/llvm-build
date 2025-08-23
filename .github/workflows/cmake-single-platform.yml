@@ -40,10 +40,10 @@ jobs:
 
     - name: Build
       # Build your program with the given configuration
-      run: cd /home/user/llvm-google/llvm/out && DESTDIR=$HOME/out ninja install
+      run: cd /home/user/llvm-google/llvm/out && DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
        name: deb
-       path: $HOME/out
+       path: /home/runner/work/llvm-build/llvm-build/out
 
