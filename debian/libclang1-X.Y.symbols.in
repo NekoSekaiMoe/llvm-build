@@ -1,0 +1,6 @@
+libclang-@LLVM_VERSION@.so.@LLVM_VERSION@ #PACKAGE# #MINVER#
+ (symver)LLVM_13 1:15.0.7
+ (symver)LLVM_16 1:16.0.2
+ (symver)LLVM_17 1:17.0.1
+ (symver)LLVM_19 1:19.1.6
+ (symver)LLVM_20 1:20.1

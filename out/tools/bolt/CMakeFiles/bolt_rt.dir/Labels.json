@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/CMakeFiles/bolt_rt"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/CMakeFiles/bolt_rt.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/CMakeFiles/bolt_rt-complete.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-build.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-configure.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-download.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-install.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-mkdir.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-patch.rule"
+		},
+		{
+			"file" : "/home/user/llvm-google/llvm/out/tools/bolt/bolt_rt-stamps/bolt_rt-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"bolt_rt"
+		],
+		"name" : "bolt_rt"
+	}
+}

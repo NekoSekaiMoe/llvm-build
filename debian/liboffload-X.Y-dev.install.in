@@ -1,0 +1,11 @@
+#!/usr/bin/dh-exec
+
+[amd64 arm64 loong64 mips64el ppc64el ppc64 riscv64] usr/lib/llvm-@LLVM_VERSION@/bin/llvm-offload-device-info
+[amd64 arm64 loong64 mips64el ppc64el ppc64 riscv64] usr/lib/llvm-@LLVM_VERSION@/bin/llvm-omp-kernel-replay
+
+[amd64 arm64 loong64 mips64el ppc64el ppc64 riscv64] usr/bin/llvm-offload-device-info-@LLVM_VERSION@
+[amd64 arm64 loong64 mips64el ppc64el ppc64 riscv64] usr/bin/llvm-omp-kernel-replay-@LLVM_VERSION@
+
+usr/lib/llvm-@LLVM_VERSION@/include/offload/OffloadAPI.h
+usr/lib/llvm-@LLVM_VERSION@/include/offload/OffloadPrint.hpp
+usr/lib/llvm-@LLVM_VERSION@/lib/libLLVMOffload.so

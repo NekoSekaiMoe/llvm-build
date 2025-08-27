@@ -1,0 +1,1 @@
+#define LLD_VERSION_STRING "20.0.0"

@@ -1,0 +1,53 @@
+# This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
+name: CMake on a single platform
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: Release
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        repository: dpkg123/llvm-google
+        ref: llvm-r547379-release
+        path: a
+
+    - uses: actions/checkout@v5
+      with:
+        path: b 
+    - name: dep
+      run: |
+        sudo apt update
+        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* strip -y
+        sudo mkdir -p /home/user
+        sudo chmod 777 -R /home/user
+        sudo mv a -v /home/user/llvm-google
+        sudo mv b/out -v /home/user/llvm-google/llvm/out
+        sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
+        sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
+
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        cd /home/user/llvm-google/llvm/out
+        DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install
+        strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
+        strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
+    - name: Upload
+      uses: actions/upload-artifact@v4
+      with:
+       name: deb
+       path: /home/runner/work/llvm-build/llvm-build/out
+

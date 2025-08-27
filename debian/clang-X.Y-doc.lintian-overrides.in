@@ -1,0 +1,4 @@
+clang-@LLVM_VERSION@-doc: embedded-javascript-library please use sphinx [usr/share/doc/clang-*/html/_static/searchtools.js]
+clang-@LLVM_VERSION@-doc: embedded-javascript-library please use sphinx [usr/share/doc/clang-*/html/_static/language_data.js]
+clang-@LLVM_VERSION@-doc: embedded-javascript-library please use sphinx [usr/share/doc/clang-*/html/_static/doctools.js]
+clang-@LLVM_VERSION@-doc: privacy-breach-generic: *youtube*

@@ -1,0 +1,7 @@
+#!/usr/bin/dh-exec
+
+usr/lib/llvm-@LLVM_VERSION@/lib/libomp*.so.5
+usr/lib/llvm-@LLVM_VERSION@/lib/libgomp.so.1
+[amd64 hurd-amd64 arm64 mips64el ppc64el ppc64 riscv64 loong64] usr/lib/llvm-@LLVM_VERSION@/lib/libomptarget*.so.@LLVM_VERSION@.@LLVM_VERSION_MINOR@
+
+

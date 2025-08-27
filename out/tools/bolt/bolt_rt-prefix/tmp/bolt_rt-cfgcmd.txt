@@ -1,0 +1,1 @@
+cmd='/usr/bin/cmake;-DCMAKE_C_COMPILER=/bin/cc;-DCMAKE_CXX_COMPILER=/bin/c++;-DCMAKE_BUILD_TYPE=Release;-DCMAKE_MAKE_PROGRAM=/bin/ninja;-DLLVM_LIBDIR_SUFFIX=;-DLLVM_LIBRARY_DIR=/home/user/llvm-google/llvm/out/./lib;-DBOLT_BUILT_STANDALONE=;-GNinja;-S;<SOURCE_DIR><SOURCE_SUBDIR>;-B;<BINARY_DIR>'
