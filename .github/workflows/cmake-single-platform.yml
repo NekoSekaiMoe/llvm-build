@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
 
     steps:
-    - uses: rokibhasansagar/slimhub_actions@main
+    #- uses: rokibhasansagar/slimhub_actions@main
     - uses: actions/checkout@v5
       with:
         repository: dpkg123/llvm
