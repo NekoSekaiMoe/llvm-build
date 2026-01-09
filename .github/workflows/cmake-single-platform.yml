@@ -21,8 +21,8 @@ jobs:
     - uses: rokibhasansagar/slimhub_actions@main
     - uses: actions/checkout@v5
       with:
-        repository: dpkg123/llvm-google
-        ref: llvm-r547379-release
+        repository: dpkg123/llvm
+        ref: ollvm-r547379-clang21-rebase
         path: a
 
     - uses: actions/checkout@v5
@@ -31,21 +31,21 @@ jobs:
     - name: dep
       run: |
         sudo apt update
-        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
+        sudo apt install cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
         sudo mkdir -p /home/user
         sudo chmod 777 -R /home/user
         sudo mv a -v /home/user/llvm-google
         sudo mv b/out -v /home/user/llvm-google/llvm/out
-        sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
-        sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
+        #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
+        #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
 
     - name: Build
       # Build your program with the given configuration
       run: |
         cd /home/user/llvm-google/llvm/out
         DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install
-        strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
-        strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
+        #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
+        #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
     - name: Upload
       uses: actions/upload-artifact@v4
       with:
