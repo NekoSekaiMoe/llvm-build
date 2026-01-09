@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v5
       with:
         repository: dpkg123/llvm
-        ref: ollvm-r547379-clang21-rebase
+        ref: ollvm-r574158-clang21-rebase
         path: a
 
     - uses: actions/checkout@v5
