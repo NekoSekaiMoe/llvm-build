@@ -19,23 +19,6 @@ BOLT_BUILD_TOOLS:BOOL=ON
 
 //Path to clang executable for the target architecture for use
 // in BOLT tests
-BOLT_CLANG_EXE:FILEPATH=
-
-//Enable BOLT runtime
-BOLT_ENABLE_RUNTIME:BOOL=ON
-
-//Generate build targets for the BOLT docs.
-BOLT_INCLUDE_DOCS:BOOL=OFF
-
-//Path to lld executable for the target architecture for use in
-// BOLT tests
-BOLT_LLD_EXE:FILEPATH=
-
-//Targets for BOLT to support.
-BOLT_TARGETS_TO_BUILD:STRING=AArch64
-
-//Path for binary subdirectory (defaults to 'bin')
-BOLT_TOOLS_INSTALL_DIR:PATH=bin
 
 //Default URL where bug reports are to be submitted.
 BUG_REPORT_URL:STRING=https://github.com/llvm/llvm-project/issues/
@@ -54,10 +37,6 @@ Backtrace_INCLUDE_DIR:PATH=/usr/include
 
 //Library providing backtrace(3), empty for default set of libraries
 Backtrace_LIBRARY:FILEPATH=
-
-//Apply BOLT optimization to Clang.   May be specified as Instrument
-// or Perf or LBR to use a particular profiling   mechanism.
-CLANG_BOLT:STRING=PERF
 
 //Build CLANG example programs by default.
 CLANG_BUILD_EXAMPLES:BOOL=OFF
