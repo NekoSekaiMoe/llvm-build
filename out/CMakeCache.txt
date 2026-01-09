@@ -57,7 +57,7 @@ Backtrace_LIBRARY:FILEPATH=
 
 //Apply BOLT optimization to Clang.   May be specified as Instrument
 // or Perf or LBR to use a particular profiling   mechanism.
-CLANG_BOLT:STRING=ON
+CLANG_BOLT:STRING=PERF
 
 //Build CLANG example programs by default.
 CLANG_BUILD_EXAMPLES:BOOL=OFF
