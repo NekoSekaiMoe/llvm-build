@@ -40,7 +40,7 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: |
-        cd llvm-google/llvm/
+        cd /home/user/llvm-google/llvm/
         mkdir out
         cd out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt;polly" -DCMAKE_BUILD_TYPE=Release
