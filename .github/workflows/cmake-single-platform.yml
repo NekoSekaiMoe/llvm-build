@@ -19,11 +19,6 @@ jobs:
 
     steps:
     #- uses: rokibhasansagar/slimhub_actions@main
-    - uses: actions/checkout@v5
-      with:
-        repository: dpkg123/llvm
-        ref: ollvm-r574158-clang21-rebase
-        path: a
 
     - uses: actions/checkout@v5
       with:
@@ -44,6 +39,7 @@ jobs:
       run: |
         cd /home/user/llvm-google/llvm/
         mkdir out
+        cd out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt;polly"
         DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
