@@ -27,9 +27,9 @@ jobs:
       run: |
         sudo apt update
         sudo apt install cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
-        sudo mkdir -p /home/user
-        sudo chmod 777 -R /home/user
-        sudo mv a -v /home/user/llvm-google
+        #sudo mkdir -p /home/user
+        #sudo chmod 777 -R /home/user
+        #sudo mv a -v /home/user/llvm-google
         #sudo mv b/out -v /home/user/llvm-google/llvm/out
         #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
         #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
