@@ -43,7 +43,7 @@ jobs:
         cd /home/user/llvm-google/llvm/
         mkdir out
         cd out
-        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt;polly;libc" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -GNinja
+        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt;polly" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -GNinja
         DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
