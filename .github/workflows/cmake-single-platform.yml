@@ -29,13 +29,19 @@ jobs:
     - name: dep
       run: |
         sudo apt update
-        sudo apt install cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
+        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
         sudo mkdir -p /home/user
         sudo chmod 777 -R /home/user
         sudo mv a -v /home/user/llvm-google
         #sudo mv b/out -v /home/user/llvm-google/llvm/out
         #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
         #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.2
+      with:
+       create-symlink: true
+       max-size: 1024MB
 
     - name: Build
       # Build your program with the given configuration
@@ -44,7 +50,7 @@ jobs:
         mkdir out
         cd out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;compiler-rt;polly" -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -GNinja
-        DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install
+        DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install/strip
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
     - name: Upload
