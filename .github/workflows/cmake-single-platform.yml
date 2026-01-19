@@ -29,7 +29,7 @@ jobs:
     - name: dep
       run: |
         sudo apt update
-        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
+        sudo apt install ccache cmake clang lld build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
         sudo mkdir -p /home/user
         sudo chmod 777 -R /home/user
         sudo mv a -v /home/user/llvm-google
@@ -49,11 +49,11 @@ jobs:
         cd /home/user/llvm-google/llvm/
         mkdir out
         cd out
-        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;polly;compiler-rt" \
+        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF -DLLVM_ENABLE_PROJECTS="clang;lld;polly;compiler-rt" -DCMAKE_CXX_COMPILER=clang++ \
         -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DCMAKE_DISABLE_FIND_PACKAGE_CUDAToolkit=TRUE \
-        -DLLVM_ENABLE_Z3_SOLVER=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF \
-        -DLLVM_INSTALL_UTILS=ON -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_UNREACHABLE_OPTIMIZE=OFF -DPOLLY_ENABLE_GPGPU_CODEGEN=OFF \
-        -DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DLLVM_BUILD_RUNTIME=OFF \
+        -DLLVM_ENABLE_Z3_SOLVER=OFF -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_ENABLE_LTO=Thin -DLLVM_ENABLE_LLD=ON \
+        -DLLVM_INSTALL_UTILS=ON -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_UNREACHABLE_OPTIMIZE=OFF -DPOLLY_ENABLE_GPGPU_CODEGEN=OFF -DCMAKE_C_COMPILER=clang \
+        -DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DLLVM_BUILD_RUNTIME=OFF -DCMAKE_ASM_COMPILER=clang \
         -GNinja
         DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install/strip
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
