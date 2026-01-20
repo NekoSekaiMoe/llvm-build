@@ -20,7 +20,7 @@ jobs:
     steps:
     #- uses: rokibhasansagar/slimhub_actions@main
 
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
         repository: dpkg123/llvm
         ref: ollvm-r574158-clang21-rebase
@@ -62,7 +62,7 @@ jobs:
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
     - name: Upload
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
        name: deb
        path: /home/runner/work/llvm-build/llvm-build/out
