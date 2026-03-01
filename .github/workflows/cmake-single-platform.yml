@@ -49,7 +49,7 @@ jobs:
         cd /home/user/llvm-google/llvm/
         mkdir out
         cd out
-        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF
+        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
         -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
         -DLLVM_ENABLE_PROJECTS="clang;lld;polly" \
         -DCMAKE_BUILD_TYPE=MinSizeRel -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DLLVM_ENABLE_Z3_SOLVER=OFF \
