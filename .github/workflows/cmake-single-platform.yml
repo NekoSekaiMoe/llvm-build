@@ -48,7 +48,12 @@ jobs:
       run: |
         cd /home/user/llvm-google/llvm/
         mkdir out
-        cd out
+        cd tools
+        rm -rf llvm-as-fuzzer llvm-as llvm-cat gold llvm-cfi-verify llvm-cgdata llvm-cov \
+        llvm-cxxdump llvm-cvtres llvm-ctxprof-util llvm-cgdata llvm-diff llvm-dis-fuzzer yaml2obj \
+        llvm-dwp llvm-gpu-loader llvm-mc llvm-mca llvm-ml llvm-mt llc lli bugpoint llvm-reduce \
+        llvm-exegesis llvm-dwarfutil llvm-c-test llvm-dwp llvm-split llvm-gsymutil llvm-stress
+        cd ../out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
         -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
         -DLLVM_ENABLE_PROJECTS="clang;lld;polly" \
