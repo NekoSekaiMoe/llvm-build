@@ -55,7 +55,7 @@ jobs:
         llvm-exegesis llvm-dwarfutil llvm-c-test llvm-dwp llvm-split llvm-gsymutil llvm-stress \
         dsymutil llvm-jitlink llvm-otool llvm-profgen sancov llvm-lipo llvm-libtool-darwin \
         verify-uselistorder sanstats llvm-xray llvm-undname llvm-size llvm-sim llvm-rtdyld \
-        llvm-remarkutil llvm-readtapi llvm-readobj llvm-rc llvm-profdata llvm-pdbutil llvm-modextract \
+        llvm-remarkutil llvm-readtapi llvm-readobj llvm-rc llvm-pdbutil llvm-modextract \
         llvm-ifs llvm-extract obj2yaml
         cd ../out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
