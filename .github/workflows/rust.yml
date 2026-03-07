@@ -3,6 +3,7 @@
 name: Rust
 
 on:
+  push:
   workflow_dispatch:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -35,12 +36,6 @@ jobs:
         #sudo mv b/out -v /home/user/llvm-google/llvm/out
         #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
         #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
-
-    - name: ccache
-      uses: hendrikmuhs/ccache-action@v1.2
-      with:
-       create-symlink: true
-       max-size: 1024MB
 
     - name: Build
       # Build your program with the given configuration
