@@ -43,13 +43,13 @@ jobs:
         cd /home/user/llvm-google/llvm/
         mkdir out
         cd tools
-        rm -rf llvm-as-fuzzer llvm-as llvm-cat gold llvm-cfi-verify llvm-cgdata \
+        rm -rf llvm-as-fuzzer llvm-cat gold llvm-cfi-verify llvm-cgdata \
         llvm-cxxdump llvm-cvtres llvm-ctxprof-util llvm-cgdata llvm-diff llvm-dis-fuzzer yaml2obj \
-        llvm-dwp llvm-gpu-loader llvm-mc llvm-mca llvm-ml llvm-mt llc lli bugpoint llvm-reduce \
+        llvm-dwp llvm-gpu-loader llvm-mc llvm-mca llvm-ml llvm-mt lli bugpoint llvm-reduce \
         llvm-exegesis llvm-dwarfutil llvm-c-test llvm-dwp llvm-split llvm-gsymutil llvm-stress \
         dsymutil llvm-jitlink llvm-otool llvm-profgen sancov llvm-lipo llvm-libtool-darwin \
-        verify-uselistorder sanstats llvm-xray llvm-undname llvm-size llvm-sim llvm-rtdyld \
-        llvm-remarkutil llvm-readtapi llvm-readobj llvm-rc llvm-pdbutil llvm-modextract \
+        verify-uselistorder sanstats llvm-xray llvm-undname llvm-sim llvm-rtdyld \
+        llvm-remarkutil llvm-readtapi llvm-rc llvm-pdbutil llvm-modextract \
         llvm-ifs llvm-extract obj2yaml
         cd ../out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
