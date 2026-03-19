@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
+  BUILD_TYPE: MinSizeRel
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
     - uses: actions/checkout@v6
       with:
         repository: dpkg123/llvm
-        ref: ollvm-r574158-clang21-rebase
+        ref: ollvm-r596125-clang22
         path: a
         fetch-depth: 1
          
@@ -55,7 +55,7 @@ jobs:
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
         -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
         -DLLVM_ENABLE_PROJECTS="clang;lld;polly;compiler-rt" \
-        -DCMAKE_BUILD_TYPE=Release -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DLLVM_ENABLE_Z3_SOLVER=OFF \
+        -DCMAKE_BUILD_TYPE=MinSizeRel -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DLLVM_ENABLE_Z3_SOLVER=OFF \
         -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INSTALL_UTILS=ON \
         -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_UNREACHABLE_OPTIMIZE=OFF -DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON \
         -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi;libunwind" -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBEDIT=OFF \
@@ -80,7 +80,7 @@ jobs:
         mv /home/runner/work/llvm-build/llvm-build/a/* /home/user/llvm-google/llvm/out
         python3 build-rust.py --llvm-install-folder "/home/runner/work/llvm-build/llvm-build/out/usr/local" --install-folder "/home/runner/work/llvm-build/llvm-build/out/usr/local" --show-build-commands
     - name: Upload
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
        name: deb-rust
        path: /home/runner/work/llvm-build/llvm-build/out
