@@ -86,7 +86,7 @@ jobs:
       run: |
         cd /home/user/llvm-google/llvm/out
         mv /home/runner/work/llvm-build/llvm-build/a /home/user/llvm-google/llvm/out/
-        /home/user/llvm-google/llvm/out/a/configure --release-description RUSTAOSPCLANG --disable-docs --enable-locked-deps --enable-verbose-configure --tools cargo,clippy,src --prefix /home/runner/work/llvm-build/llvm-build/out/usr/local --sysconfdir etc --disable-codegen-tests --disable-lld --disable-llvm-bitcode-linker --llvm-root /home/runner/work/llvm-build/llvm-build/out/usr/local
+        /home/user/llvm-google/llvm/out/a/configure --release-description RUSTAOSPCLANG --disable-docs --enable-locked-deps --enable-verbose-configure --tools cargo,src --prefix /home/runner/work/llvm-build/llvm-build/out/usr/local --sysconfdir etc --disable-codegen-tests --disable-lld --disable-llvm-bitcode-linker --llvm-root /home/runner/work/llvm-build/llvm-build/out/usr/local
     - name: Build rust
       run: |
         cd /home/user/llvm-google/llvm/out
