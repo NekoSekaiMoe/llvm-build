@@ -37,7 +37,7 @@ jobs:
         #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
         #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
 
-    - name: Build
+    - name: Configure LLVM
       # Build your program with the given configuration
       run: |
         cd /home/user/llvm-google/llvm/
@@ -66,19 +66,31 @@ jobs:
         -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_BACKTRACES=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF \
         -DLLVM_ENABLE_WARNINGS=OFF -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=host -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR= -DLLVM_INCLUDE_DOCS=OFF \
         -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_LINK_LLVM_DYLIB=OFF
+
+    - name: Build
+      # Build your program with the given configuration
+      run: |
+        cd /home/user/llvm-google/llvm/out
         DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install/strip
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
         #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
 
     - uses: actions/checkout@v6
       with:
-        repository: clangbuiltlinux/tc-build
+        repository: rust-lang/rust
         path: /home/runner/work/llvm-build/llvm-build/a
+        fetch-depth: 1
+        submodule: true
+        submodules: true
+    - name: Configure rust
+      run: |
+        cd /home/user/llvm-google/llvm/out
+        mv /home/runner/work/llvm-build/llvm-build/a /home/user/llvm-google/llvm/out/
+        /home/user/llvm-google/llvm/out/a/configure --release-description RUSTAOSPCLANG --disable-docs --enable-locked-deps --enable-verbose-configure --tools cargo,clippy,src --prefix /home/runner/work/llvm-build/llvm-build/out/usr/local --sysconfdir etc --disable-codegen-tests --disable-lld --disable-llvm-bitcode-linker --llvm-root /home/runner/work/llvm-build/llvm-build/out/usr/local
     - name: Build rust
       run: |
         cd /home/user/llvm-google/llvm/out
-        mv /home/runner/work/llvm-build/llvm-build/a/* /home/user/llvm-google/llvm/out
-        python3 build-rust.py --llvm-install-folder "/home/runner/work/llvm-build/llvm-build/out/usr/local" --install-folder "/home/runner/work/llvm-build/llvm-build/out/usr/local" --show-build-commands
+        python3 ./a/x.py install
     - name: Upload
       uses: actions/upload-artifact@v7
       with:
