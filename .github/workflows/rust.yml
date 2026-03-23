@@ -80,7 +80,6 @@ jobs:
         repository: rust-lang/rust
         path: /home/runner/work/llvm-build/llvm-build/a
         fetch-depth: 1
-        submodule: true
         submodules: true
     - name: Configure rust
       run: |
