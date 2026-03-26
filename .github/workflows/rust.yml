@@ -33,9 +33,6 @@ jobs:
         sudo mkdir -p /home/user
         sudo chmod 777 -R /home/user
         sudo mv a -v /home/user/llvm-google
-        #sudo mv b/out -v /home/user/llvm-google/llvm/out
-        #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
-        #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
 
     - name: Configure LLVM
       # Build your program with the given configuration
@@ -72,8 +69,6 @@ jobs:
       run: |
         cd /home/user/llvm-google/llvm/out
         DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install/strip
-        #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
-        #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
 
     - uses: actions/checkout@v6
       with:
