@@ -1,0 +1,126 @@
+# This starter workflow is for a CMake project running on a single platform. There is a different starter workflow if you need cross-platform coverage.
+# See: https://github.com/actions/starter-workflows/blob/main/ci/cmake-multi-platform.yml
+name: CMake on a single platform
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+env:
+  # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
+  BUILD_TYPE: MinSizeRel
+
+jobs:
+  build:
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+    #- uses: rokibhasansagar/slimhub_actions@main
+
+    - uses: actions/checkout@v6
+      with:
+        repository: dpkg123/llvm
+        ref: ollvm-r596125-clang22
+        path: a
+         
+    - name: dep
+      run: |
+        sudo apt update
+        sudo apt install ccache cmake gcc g++ build-essential libelf-dev libssl-dev libz-dev libzstd-dev valgrind* binutils -y
+        sudo mkdir -p /home/user
+        sudo chmod 777 -R /home/user
+        sudo mv a -v /home/user/llvm-google
+        #sudo mv b/out -v /home/user/llvm-google/llvm/out
+        #sudo mv b/common.h -v /home/user/llvm-google/libc/src/__support/common.h
+        #sudo mv b/sme-libc-routines.c -v /home/user/llvm-google/compiler-rt/lib/builtins/aarch64/sme-libc-routines.c
+
+    - name: Build Stage 0
+      # Build your program with the given configuration
+      run: |
+        cd /home/user/llvm-google/llvm/
+        mkdir out-0
+        cd tools
+        rm -rf llvm-as-fuzzer llvm-as llvm-cat gold llvm-cfi-verify llvm-cgdata llvm-cov \
+        llvm-cxxdump llvm-cvtres llvm-ctxprof-util llvm-cgdata llvm-diff llvm-dis-fuzzer yaml2obj \
+        llvm-dwp llvm-gpu-loader llvm-mc llvm-mca llvm-ml llvm-mt llc lli bugpoint llvm-reduce \
+        llvm-exegesis llvm-dwarfutil llvm-c-test llvm-dwp llvm-split llvm-gsymutil llvm-stress \
+        dsymutil llvm-jitlink llvm-otool sancov llvm-lipo llvm-libtool-darwin \
+        verify-uselistorder sanstats llvm-xray llvm-undname llvm-size llvm-sim llvm-rtdyld \
+        llvm-remarkutil llvm-readtapi llvm-readobj llvm-rc llvm-pdbutil llvm-modextract \
+        llvm-ifs llvm-extract obj2yaml
+        cd ../out-0
+        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
+        -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
+        -DLLVM_ENABLE_PROJECTS="clang;lld;polly" \
+        -DCMAKE_BUILD_TYPE=MinSizeRel -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DLLVM_ENABLE_Z3_SOLVER=OFF \
+        -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INSTALL_UTILS=ON \
+        -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_UNREACHABLE_OPTIMIZE=ON -DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON \
+        -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DLLVM_BUILD_RUNTIME=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBEDIT=OFF \
+        -DLLVM_ENABLE_LIBPFM=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF -DLLVM_ENABLE_PLUGINS=OFF -DCLANG_INCLUDE_DOCS=OFF \
+        -DCLANG_INCLUDE_TESTS=OFF -DCLANG_TOOL_CLANG_IMPORT_TEST_BUILD=OFF -DCLANG_TOOL_CLANG_LINKER_WRAPPER_BUILD=OFF \
+        -DCLANG_TOOL_C_INDEX_TEST_BUILD=OFF -DLLD_INCLUDE_TESTS=OFF -DLLD_INCLUDE_DOCS=OFF -DPOLLY_INCLUDE_TESTS=OFF -DPOLLY_INCLUDE_DOCS=OFF \
+        -GNinja -DCLANG_ENABLE_OBJC_REWRITTER=OFF -DCLANG_ENABLE_STATIC_ANALYZER=OFF -DCLANG_PLUGIN_SUPPORT=OFF -DCLANG_VENDOR=Pdx \
+        -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_BACKTRACES=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF \
+        -DLLVM_ENABLE_WARNINGS=OFF -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=host -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR= -DLLVM_INCLUDE_DOCS=OFF \
+        -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_LINK_LLVM_DYLIB=OFF
+        DESTDIR=/home/runner/work/llvm-build/llvm-build/out-0 ninja install/strip >/dev/null
+        #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/bin)
+        #strip --strip-unneeded --preserve-dates -v $(find /home/runner/work/llvm-build/llvm-build/out/usr/local/lib)
+    - name: Build stage 1
+      run: |
+        cd  /home/user/llvm-google/llvm/
+        mkdir out-1
+        cd out-1
+        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
+        -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
+        -DLLVM_ENABLE_PROJECTS="clang;lld;polly" -DCMAKE_C_COMPILER="/home/runner/work/llvm-build/llvm-build/out-0/bin/clang-22" \
+        -DCMAKE_CXX_COMPILER="/home/runner/work/llvm-build/llvm-build/out-0/bin/clang++-22" -DCMAKE_ASM_COMPILER="/home/runner/work/llvm-build/llvm-build/out-0/bin/clang-22" \
+        -DCMAKE_BUILD_TYPE=MinSizeRel -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DLLVM_ENABLE_Z3_SOLVER=OFF \
+        -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INSTALL_UTILS=ON \
+        -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_UNREACHABLE_OPTIMIZE=ON -DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON \
+        -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DLLVM_BUILD_RUNTIME=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBEDIT=OFF \
+        -DLLVM_ENABLE_LIBPFM=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF -DLLVM_ENABLE_PLUGINS=OFF -DCLANG_INCLUDE_DOCS=OFF \
+        -DCLANG_INCLUDE_TESTS=OFF -DCLANG_TOOL_CLANG_IMPORT_TEST_BUILD=OFF -DCLANG_TOOL_CLANG_LINKER_WRAPPER_BUILD=OFF \
+        -DCLANG_TOOL_C_INDEX_TEST_BUILD=OFF -DLLD_INCLUDE_TESTS=OFF -DLLD_INCLUDE_DOCS=OFF -DPOLLY_INCLUDE_TESTS=OFF -DPOLLY_INCLUDE_DOCS=OFF \
+        -GNinja -DCLANG_ENABLE_OBJC_REWRITTER=OFF -DCLANG_ENABLE_STATIC_ANALYZER=OFF -DCLANG_PLUGIN_SUPPORT=OFF -DCLANG_VENDOR=Pdx \
+        -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_BACKTRACES=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF \
+        -DLLVM_ENABLE_WARNINGS=OFF -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=host -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR= -DLLVM_INCLUDE_DOCS=OFF \
+        -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_LINK_LLVM_DYLIB=OFF -DLLVM_BUILD_INSTRUMENTED=IR
+        DESTDIR=/home/runner/work/llvm-build/llvm-build/out-0 ninja install/strip >/dev/null
+        DESTDIR=/home/runner/work/llvm-build/llvm-build/out-1 ninja install/strip >/dev/null
+        git clone --depth=1 https://github.com/torvalds/linux.git
+        cd linux
+        make CC="/home/runner/work/llvm-build/llvm-build/out-0/bin/clang-22" defconfig all -j8
+        mv *.profraw ..
+
+    - name: Build stage 2
+      run: |
+        cd  /home/user/llvm-google/llvm/
+        mkdir out-1
+        cd out-1
+        cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
+        -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
+        -DLLVM_ENABLE_PROJECTS="clang;lld;polly" -DCMAKE_C_COMPILER="/home/runner/work/llvm-build/llvm-build/out-1/bin/clang-22" \
+        -DCMAKE_CXX_COMPILER="/home/runner/work/llvm-build/llvm-build/out-1/bin/clang++-22" -DCMAKE_ASM_COMPILER="/home/runner/work/llvm-build/llvm-build/out-1/bin/clang-22" \
+        -DCMAKE_BUILD_TYPE=MinSizeRel -DLLVM_TARGETS_TO_BUILD="AArch64;ARM;X86" -DLLVM_CCACHE_BUILD=ON -DLLVM_ENABLE_Z3_SOLVER=OFF \
+        -DLLVM_INCLUDE_BENCHMARKS=OFF -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_INSTALL_UTILS=ON \
+        -DLLVM_OPTIMIZED_TABLEGEN=ON -DLLVM_UNREACHABLE_OPTIMIZE=ON -DLLVM_ENABLE_EH=ON -DLLVM_ENABLE_RTTI=ON \
+        -DCMAKE_INTERPROCEDURAL_OPTIMIZATION=OFF -DLLVM_BUILD_RUNTIME=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBEDIT=OFF \
+        -DLLVM_ENABLE_LIBPFM=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF -DLLVM_ENABLE_PLUGINS=OFF -DCLANG_INCLUDE_DOCS=OFF \
+        -DCLANG_INCLUDE_TESTS=OFF -DCLANG_TOOL_CLANG_IMPORT_TEST_BUILD=OFF -DCLANG_TOOL_CLANG_LINKER_WRAPPER_BUILD=OFF \
+        -DCLANG_TOOL_C_INDEX_TEST_BUILD=OFF -DLLD_INCLUDE_TESTS=OFF -DLLD_INCLUDE_DOCS=OFF -DPOLLY_INCLUDE_TESTS=OFF -DPOLLY_INCLUDE_DOCS=OFF \
+        -GNinja -DCLANG_ENABLE_OBJC_REWRITTER=OFF -DCLANG_ENABLE_STATIC_ANALYZER=OFF -DCLANG_PLUGIN_SUPPORT=OFF -DCLANG_VENDOR=Pdx \
+        -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_ENABLE_BACKTRACES=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_ENABLE_LIBXML2=OFF -DLLVM_ENABLE_OCAMLDOC=OFF \
+        -DLLVM_ENABLE_WARNINGS=OFF -DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD=host -DLLVM_EXTERNAL_CLANG_TOOLS_EXTRA_SOURCE_DIR= -DLLVM_INCLUDE_DOCS=OFF \
+        -DLLVM_INCLUDE_EXAMPLES=OFF -DLLVM_INCLUDE_TESTS=OFF -DLLVM_LINK_LLVM_DYLIB=OFF -DLLVM_PROFDATA_FILE=clang.profdata -DLLVM_ENABLE_LTO=Thin
+        DESTDIR=/home/runner/work/llvm-build/llvm-build/out ninja install/strip >/dev/null
+        
+
+    - name: Upload
+      uses: actions/upload-artifact@v7
+      with:
+       name: deb
+       path: /home/runner/work/llvm-build/llvm-build/out
