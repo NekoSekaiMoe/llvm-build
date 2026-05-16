@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v6
       with:
         repository: dpkg123/llvm
-        ref: ollvm-r574158-clang21-rebase
+        ref: ollvm-r596125-clang22-rebase
         path: a
          
     - name: dep
