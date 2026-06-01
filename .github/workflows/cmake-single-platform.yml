@@ -56,7 +56,8 @@ jobs:
         dsymutil llvm-jitlink llvm-otool llvm-profgen sancov llvm-lipo llvm-libtool-darwin \
         verify-uselistorder sanstats llvm-xray llvm-undname llvm-size llvm-sim llvm-rtdyld \
         llvm-remarkutil llvm-readtapi llvm-readobj llvm-rc llvm-pdbutil llvm-modextract \
-        llvm-ifs llvm-extract obj2yaml
+        llvm-ifs llvm-extract obj2yaml llvm-bcanalyzer llvm-cas llvm-cxxfilt llvm-offload-wrapper \
+        llvm-yaml-parser-fuzzer llvm-isel-fuzzer llvm-opt-fuzzer llvm-ir2vec || true
         cd ../out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
         -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
