@@ -47,7 +47,8 @@ jobs:
         dsymutil llvm-jitlink llvm-otool llvm-profgen sancov llvm-lipo llvm-libtool-darwin \
         verify-uselistorder sanstats llvm-xray llvm-undname llvm-sim llvm-rtdyld \
         llvm-remarkutil llvm-readtapi llvm-rc llvm-pdbutil llvm-modextract \
-        llvm-ifs llvm-extract obj2yaml
+        llvm-ifs llvm-extract obj2yaml llvm-dlang-demangle-fuzzer llvm-itanium-demangle-fuzzer \
+        llvm-microsoft-demangle-fuzzer llvm-tli-checker llvm-otool llvm-dlang-demangle-fuzzer || true
         cd ../out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
         -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
