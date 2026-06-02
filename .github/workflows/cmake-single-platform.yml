@@ -59,7 +59,7 @@ jobs:
         llvm-ifs llvm-extract obj2yaml llvm-bcanalyzer llvm-cas llvm-cxxfilt llvm-offload-wrapper \
         llvm-yaml-parser-fuzzer llvm-isel-fuzzer llvm-opt-fuzzer llvm-ir2vec llvm-cxxmap llvm-debuginfo-analyzer \
         llvm-itanium-demangle-fuzzer llvm-debuginfod-find llvm-microsoft-demangle-fuzzer llvm-otool llvm-tli-checker \
-        llvm-rust-demangle-fuzzer || true
+        llvm-rust-demangle-fuzzer yaml-bench llvm-dlltool llvm-opt-report llvm-special-case-list-fuzzer || true
         cd ../out
         cmake .. -DBUILD_SHARED_LIBS=OFF -DLLVM_BUILD_LLVM_DYLIB=OFF \
         -DLLVM_DISTRIBUTION_COMPONENTS='llvm-ar;llvm-lto;llvm-lto2;llvm-nm;llvm-ranlib;llvm-objcopy;clang;clang-resource-headers;lld;llvm-profdata' \
